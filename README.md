@@ -2,10 +2,6 @@
 
 A minimal, editorial-style Pomodoro timer built around **Editorial Neo-Brutalism**.
 
-> **Focus is a superpower.**
-
-The project combines a distraction-free Pomodoro timer with task management and a bold visual identity inspired by print/editorial design.
-
 ## Preview
 
 ![focus. preview](images/preview.png)
