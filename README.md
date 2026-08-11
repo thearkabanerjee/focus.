@@ -36,17 +36,14 @@ The interface uses:
 
 ### Dashboard
 - Session count
-- Focus-time display
-- Productivity indicator
-- Current session indicator
 - Editorial motivational messaging
 
 ### Responsive Design
-The layout adapts to smaller screens while preserving the visual language and hierarchy of the desktop version.
+The layout adapts to smaller screens while preserving the visual language and hierarchy of the desktop version. (mostly)
 
 ## Design
 
-The design direction is **Editorial Neo-Brutalism**.
+The design direction is **Editorial Neo-Brutalism**. (wasn't aware of this form until recently)
 
 The visual system intentionally uses:
 
@@ -84,7 +81,7 @@ This version intentionally keeps the stack lightweight:
 ## Project Structure
 
 ```text
-pomofocus-editorial/
+focus./
 └── index.html
 ```
 
@@ -193,7 +190,7 @@ The project uses:
 
 ## Roadmap
 
-The current version is a functional front-end prototype. Possible future improvements include:
+The current version is a functional front-end prototype. Possible future improvements include:  (i said possible, i might never come back to this project too, i guess only time can tell)
 
 - [ ] LocalStorage persistence
 - [ ] Persistent task list
@@ -203,16 +200,16 @@ The current version is a functional front-end prototype. Possible future improve
 - [ ] Sound notifications
 - [ ] Browser notifications
 - [ ] Automatic break scheduling
-- [ ] Daily focus statistics
+- [ ] Daily focus statistics (hard work, doesn't pay well)
 - [ ] Weekly reports
 - [ ] Productivity charts
-- [ ] Dark mode
+- [ ] Dark mode (just the dark version but replacing the orange with a bit of cyan)
 - [ ] Keyboard shortcuts
 - [ ] Settings panel
-- [ ] Sign-in / accounts
+- [ ] Sign-in / accounts (though very lucrative but i dont enjoy the idea of collecting people's data)
 - [ ] Cloud synchronization
 - [ ] PWA support
-- [ ] Offline support
+- [ ] Offline support (i mean we can make an app of it)
 
 ## Philosophy
 
@@ -230,6 +227,4 @@ More focus.
 
 ## License
 
-This project is currently an experimental/personal project.
-
-Add a license here if you intend to distribute the project publicly.
+MIT
