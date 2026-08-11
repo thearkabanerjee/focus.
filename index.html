@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>focus.</title>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper:#f3f0e8; --ink:#111; --accent:#ff4028; --line:3px solid var(--ink);
+      --shadow:8px 8px 0 var(--ink);
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:Inter,sans-serif; }
+    button,input { font:inherit; }
+    button { cursor:pointer; }
+    .site { min-height:100vh; border:3px solid var(--ink); }
+    header { height:112px; border-bottom:var(--line); display:flex; align-items:center; justify-content:space-between; padding:0 6vw; }
+    .brand { font:900 48px/1 "Barlow Condensed",sans-serif; letter-spacing:-1px; }
+    .brand i { color:var(--accent); font-style:normal; }
+    .nav { display:flex; gap:10px; }
+    .nav button,.menu { background:var(--paper); border:2px solid var(--ink); min-height:54px; padding:0 25px; font:800 18px "Barlow Condensed"; text-transform:uppercase; box-shadow:4px 4px 0 var(--ink); }
+    .nav .accent { background:var(--accent); }
+    .menu { width:56px; padding:0; background:var(--ink); color:white; box-shadow:none; font-size:25px; }
+    main { display:grid; grid-template-columns:100px 1fr; min-height:650px; }
+    .rail { border-right:var(--line); display:flex; align-items:center; justify-content:center; writing-mode:vertical-rl; transform:rotate(180deg); font:700 17px "Barlow Condensed"; letter-spacing:2px; text-transform:uppercase; }
+    .rail span { color:var(--accent); }
+    .workspace { padding:50px 5vw 38px; display:grid; grid-template-columns:minmax(0,1.55fr) minmax(300px,.85fr); gap:48px; }
+    .timer-wrap { min-width:0; }
+    .timer-card,.tasks-card { border:var(--line); box-shadow:var(--shadow); background:rgba(255,255,255,.18); }
+    .timer-card { padding:26px 34px 36px; }
+    .modes { display:flex; align-items:center; border-bottom:2px solid var(--ink); height:54px; }
+    .mode { border:0; background:transparent; padding:10px 22px; font:800 19px "Barlow Condensed"; text-transform:uppercase; }
+    .mode.active { background:var(--ink); color:#fff; }
+    .timer { font:900 clamp(120px,16vw,245px)/.9 "Barlow Condensed"; letter-spacing:-8px; text-align:center; margin:54px 0 34px; }
+    .start { display:block; margin:auto; width:min(350px,80%); height:78px; border:3px solid var(--ink); background:var(--accent); box-shadow:8px 8px 0 var(--ink); font:900 34px "Barlow Condensed"; text-transform:uppercase; }
+    .start:active { transform:translate(5px,5px); box-shadow:3px 3px 0 var(--ink); }
+    .session { text-align:center; margin-top:32px; font-family:"Barlow Condensed"; font-size:21px; }
+    .session strong { display:block; font-size:30px; }
+    .session u { text-decoration-color:var(--accent); text-decoration-thickness:5px; text-underline-offset:6px; }
+    .tasks-card { padding:26px; min-height:460px; }
+    .tasks-head { display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--ink); padding-bottom:20px; }
+    .tasks-head h2 { margin:0; font:900 48px/.9 "Barlow Condensed"; text-transform:uppercase; }
+    .add { width:48px;height:48px;border:0;background:var(--ink);color:white;font-size:28px; }
+    .task-list { margin-top:38px; display:grid; gap:12px; }
+    .empty { border:3px dashed var(--ink); min-height:145px; display:grid; place-items:center; font:700 19px "Barlow Condensed"; text-transform:uppercase; }
+    .task { display:flex; align-items:center; gap:12px; border:2px solid var(--ink); padding:13px; background:var(--paper); }
+    .task.done span { text-decoration:line-through; opacity:.55; }
+    .task input { width:20px;height:20px; accent-color:var(--accent); }
+    .task span { flex:1; font-weight:700; }
+    .delete { border:0;background:none;font-size:20px; }
+    footer { display:grid; grid-template-columns:1fr 2fr 1fr; border-top:var(--line); }
+    .foot { min-height:130px; padding:25px 5vw; display:flex; align-items:center; }
+    .foot.red { background:var(--accent); font:900 24px/1.05 "Barlow Condensed"; text-transform:uppercase; }
+    .stats { justify-content:center; gap:5vw; }
+    .stat { padding:0 28px; border-left:2px solid var(--ink); }
+    .stat:first-child { border:0; }
+    .stat b { display:block; font:900 36px/.9 "Barlow Condensed"; }
+    .stat small { font:700 14px "Barlow Condensed"; text-transform:uppercase; letter-spacing:1px; }
+    .quote { background:var(--ink); color:#fff; font:800 21px/1.05 "Barlow Condensed"; text-transform:uppercase; }
+    dialog { border:var(--line); box-shadow:var(--shadow); background:var(--paper); padding:28px; width:min(450px,90vw); }
+    dialog::backdrop { background:rgba(17,17,17,.55); }
+    dialog h3 { font:900 36px "Barlow Condensed"; margin:0 0 18px; text-transform:uppercase; }
+    dialog input { width:100%; border:2px solid var(--ink); background:#fff; padding:14px; outline:none; }
+    dialog .actions { display:flex; gap:10px; margin-top:18px; }
+    dialog button { border:2px solid var(--ink); background:var(--accent); padding:12px 22px; font-weight:800; }
+    dialog .cancel { background:var(--paper); }
+    @media(max-width:900px){
+      header{padding:0 22px;height:88px}.brand{font-size:38px}.nav button{display:none}
+      main{grid-template-columns:48px 1fr}.workspace{grid-template-columns:1fr;padding:30px 24px;gap:35px}
+      .timer-card{padding:18px}.timer{font-size:clamp(100px,26vw,180px);margin:45px 0 30px}
+      footer{grid-template-columns:1fr}.stats{order:2}.quote{order:3}.foot{min-height:100px}
+    }
+  </style>
+</head>
+<body>
+<div class="site">
+  <header>
+    <div class="brand">focus<i>.</i></div>
+    <nav class="nav">
+      <button>logins are boring</button>
+    </nav>
+  </header>
+
+  <main>
+    <aside class="rail">FOCUS IS A <span>&nbsp;SUPERPOWER.</span></aside>
+    <section class="workspace">
+      <div class="timer-wrap">
+        <div class="timer-card">
+          <div class="modes">
+            <button class="mode active" data-min="25">Pomodoro</button>
+            <button class="mode" data-min="5">Short Break</button>
+            <button class="mode" data-min="15">Long Break</button>
+          </div>
+          <div class="timer" id="timer">25:00</div>
+          <button class="start" id="start">Start</button>
+        </div>
+        <div class="session"><strong>#<span id="session">1</span></strong> TIME TO <u>FOCUS!</u></div>
+      </div>
+
+      <aside class="tasks-card">
+        <div class="tasks-head"><h2>Tasks.</h2><button class="add" id="add">+</button></div>
+        <div class="task-list" id="tasks">
+          <div class="empty" id="empty">+ Add Task</div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot red">Stay focused.<br>Get shit done.<br>—</div>
+    <div class="foot stats">
+      <div class="stat"><b id="sessions">00</b><small>Sessions Today</small></div>
+    </div>
+    <div class="foot quote">Discipline today.<br>Freedom tomorrow.<br>—</div>
+  </footer>
+</div>
+
+<dialog id="taskDialog">
+  <form method="dialog" id="taskForm">
+    <h3>New task.</h3>
+    <input id="taskInput" placeholder="What are you working on?" autocomplete="off" />
+    <div class="actions"><button value="add">Add task</button><button value="cancel" class="cancel">Cancel</button></div>
+  </form>
+</dialog>
+
+<script>
+  const timerEl=document.querySelector('#timer'), start=document.querySelector('#start');
+  const dialog=document.querySelector('#taskDialog'), input=document.querySelector('#taskInput');
+  let seconds=1500, running=false, interval=null, session=1;
+  let currentMode='pomodoro';
+
+  function render(){ const m=String(Math.floor(seconds/60)).padStart(2,'0'); const s=String(seconds%60).padStart(2,'0'); timerEl.textContent=`${m}:${s}`; }
+  function reset(min){ clearInterval(interval); running=false; seconds=min*60; start.textContent='Start'; render(); }
+  start.onclick=()=>{
+    if(running){ clearInterval(interval); running=false; start.textContent='Start'; return; }
+    running=true; start.textContent='Pause';
+    interval=setInterval(()=>{
+      seconds--; render();
+      if(seconds<=0){
+        clearInterval(interval);
+        running=false;
+        start.textContent='Start';
+
+        if(currentMode === 'pomodoro'){
+          session++;
+          document.querySelector('session').textContent = session;
+
+          const completedSeries = session -1;
+          document.querySelector('#sessions').textContent = String(completedSessions).padStart(2,'0');
+        }
+        reset(25);
+      }
+    },1000);
+  };
+  document.querySelectorAll('.mode').forEach(btn=>btn.onclick=()=>{
+    document.querySelectorAll('.mode').forEach(x=>x.classList.remove('active'));
+    btn.classList.add('active');
+
+    currentMode = btn.dataset.min === '25' ? 'pomodoro' : 'break';
+
+    reset(+btn.dataset.min);
+  });
+
+  document.querySelector('#add').onclick=()=>{ dialog.showModal(); setTimeout(()=>input.focus(),50); };
+  document.querySelector('#empty').onclick=()=>{ dialog.showModal(); setTimeout(()=>input.focus(),50); };
+
+  document.querySelector('#taskForm').addEventListener('submit',e=>{
+    if(e.submitter?.value!=='add') return;
+    e.preventDefault();
+    const text=input.value.trim(); if(!text) return;
+    document.querySelector('#empty')?.remove();
+    const row=document.createElement('div'); row.className='task';
+    row.innerHTML=`<input type="checkbox"><span></span><button class="delete">×</button>`;
+    row.querySelector('span').textContent=text;
+    row.querySelector('input').onchange=()=>row.classList.toggle('done');
+    row.querySelector('.delete').onclick=()=>{row.remove(); if(!document.querySelector('.task')) document.querySelector('#tasks').innerHTML='<div class="empty" id="empty">+ Add Task</div>';};
+    document.querySelector('#tasks').append(row); input.value=''; dialog.close();
+  });
+  render();
+</script>
+</body>
+</html>
