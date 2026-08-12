@@ -12,3 +12,8 @@ good night
 i will find some water for myself
 
 ~arka
+
+
+
+update next morning (1147)
+i think the sessions counter still doesn't work but i will figure it out a little bit later
